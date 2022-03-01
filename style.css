@@ -2,3 +2,25 @@
   margin: 0;
   padding: 0;
 }
+
+h1 {
+  text-align: center;
+  margin: 20px;
+}
+
+.quiz-container {
+  border: 3px solid black;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  padding: 15px;
+  gap: 15px;
+}
+
+.answer-container {
+  display: flex;
+  flex-direction: row;
+}

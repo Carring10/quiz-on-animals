@@ -10,14 +10,17 @@
   <body>
     <h1>Animal Facts Quiz!</h1>
     <form class="quiz-container">
-      <h2>Question</h2>
-      <ul>
-        <li>Question 1</li>
-        <li>Question 2</li>
-        <li>Question 3</li>
-        <li>Question 4</li>
-      </ul>
+      <button id="beginQuiz">Start</button>
+      <h2 id="question">Question</h2>
+      <div id="answers-container">
+        <button data-choice="a" id="a">Answer 1</button>
+        <button data-choice="b" id="b">Answer 2</button>
+        <button data-choice="c" id="c">Answer 3</button>
+        <button data-choice="d" id="d">Answer 4</button>
+      </div>
+
       <button type="submit">Submit Answer</button>
     </form>
+    <script src="./script.js"></script>
   </body>
 </html>
