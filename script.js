@@ -1,5 +1,7 @@
 var triviaQuestions = [
   {
+    id: 1,
+    next: 2,
     question:
       "About how much stronger is a dog's sense of smell compared to humans'?",
     answers: {
@@ -11,6 +13,8 @@ var triviaQuestions = [
     correctAnswer: "d",
   },
   {
+    id: 2,
+    next: 3,
     question: "What color is a giraffe's tongue?",
     answers: {
       a: "Purple",
@@ -21,6 +25,8 @@ var triviaQuestions = [
     correctAnswer: "a",
   },
   {
+    id: 3,
+    next: null,
     question: "Which animal can stand on its tail?",
     answers: {
       a: "Monkeys",
@@ -71,9 +77,14 @@ for (var choice in currentQuestion.answers) {
     // When an answer choice is clicked, it turns green for correct and red for incorrect.
     if (event.target.dataset.choice === correctChoice) {
       console.log("correct");
+      console.log(currentQuestion);
     } else {
       console.log("wrong");
     }
+    var nextQuestion = triviaQuestions.filter(
+      (questionItem) => currentQuestion.next === questionItem.id
+    );
+    console.log(nextQuestion);
   });
 }
 
