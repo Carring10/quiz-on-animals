@@ -42,8 +42,12 @@ var beginQuiz = document.getElementById("beginQuiz");
 var currentQuestion = triviaQuestions[0];
 var correctChoice = currentQuestion.correctAnswer;
 var questionElement = document.getElementById("question");
+var answerElement = document.querySelectorAll("[data-choice]");
+console.log(answerElement);
 var currentAnswers = document.getElementById("answers-container");
 questionElement.innerText = currentQuestion.question;
+answerElement.innerText = currentQuestion.answers;
+var i = 0;
 
 // hide questions.
 function hideQuestion() {
@@ -66,31 +70,42 @@ var begin = beginQuiz.addEventListener("click", function (event) {
   }
 });
 
-// Each iteration of the loop gives the property in the answers object.
-for (var choice in currentQuestion.answers) {
-  var answerElement = document.getElementById(choice);
-  answerElement.innerText = currentQuestion.answers[choice];
-  answerElement.addEventListener("click", function (event) {
-    event.preventDefault();
-    console.log(event.target.dataset.choice);
+function showQuestion(question) {
+  questionElement.innerText = question.question;
+  // Each iteration of the loop gives the property in the answers object.
+  for (var choice in question.answers) {
+    var answerElement = document.getElementById(choice);
+    answerElement.innerText = question.answers[choice];
+    answerElement.addEventListener("click", handleAnswerClick);
+  }
+}
+showQuestion(currentQuestion);
 
-    // When an answer choice is clicked, it turns green for correct and red for incorrect.
-    if (event.target.dataset.choice === correctChoice) {
-      console.log("correct");
-      console.log(currentQuestion);
-    } else {
-      console.log("wrong");
-    }
-    var nextQuestion = triviaQuestions.filter(
-      (questionItem) => currentQuestion.next === questionItem.id
-    );
-    console.log(nextQuestion);
-  });
+function handleAnswerClick(event) {
+  event.preventDefault();
+  console.log(event.target.dataset.choice);
+
+  // When an answer choice is clicked, it turns green for correct and red for incorrect.
+  if (event.target.dataset.choice === correctChoice) {
+    console.log("correct");
+    console.log(currentQuestion);
+  } else {
+    console.log("wrong");
+  }
+  newQuestion();
+}
+
+// The next question and answer choices are shown.
+function newQuestion() {
+  var nextQuestion = triviaQuestions.filter(
+    (questionItem) => currentQuestion.next === questionItem.id
+  );
+  currentQuestion = nextQuestion[0];
+
+  showQuestion(currentQuestion);
 }
 
 // If it is incorrect, time from the timer is subtracted.
-
-// The next question and answer choices are shown.
 
 // When all the questions are answered or the timer reaches 0, user is given a score based off the time they have left.
 
