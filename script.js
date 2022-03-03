@@ -47,11 +47,26 @@ var currentAnswers = document.getElementById("answers-container");
 var endQuiz = document.getElementById("endQuiz");
 var initials = document.getElementById("inputElement").value;
 var submitBtn = document.getElementById("submitBtn");
+var scoreScreen = document.getElementById("scoreScreen");
+var timerDisplay = document.getElementById("timerDisplay");
 var sec = 30;
 var timer;
 
 questionElement.innerText = currentQuestion.question;
 answerElement.innerText = currentQuestion.answers;
+
+function hideTimer() {
+  timerDisplay.style.display = "none";
+}
+
+function hideScoreScreen() {
+  scoreScreen.style.display = "none";
+}
+hideScoreScreen();
+
+function showScoreScreen() {
+  scoreScreen.style.display = "block";
+}
 
 // hide questions.
 function hideQuestion() {
@@ -60,6 +75,7 @@ function hideQuestion() {
 }
 hideQuestion();
 
+// Timer.
 function startTime() {
   timer = setInterval(function () {
     document.getElementById("timerDisplay").innerHTML = "00:" + sec;
@@ -73,8 +89,8 @@ function startTime() {
 // When the start button is clicked, a timer begins and a question appears.
 beginQuiz.addEventListener("click", function (event) {
   event.preventDefault();
+  // a question and its answers appear, the start button disappears, and the timer begins.
   startTime();
-  // a question and its answers appear, the start button disappears.
   if (
     questionElement.style.display === "none" &&
     currentAnswers.style.display === "none"
@@ -92,18 +108,14 @@ function showQuestion(question) {
     var answerElement = document.getElementById(choice);
     answerElement.innerText = question.answers[choice];
     answerElement.addEventListener("click", handleAnswerClick);
-    console.log(answerElement);
   }
 }
 showQuestion(currentQuestion);
 
 function handleAnswerClick(event) {
   event.preventDefault();
-  console.log(event.target.dataset.choice);
-
   // When an answer choice is clicked, it adds time if the answer is correct.
   if (event.target.dataset.choice === correctChoice) {
-    console.log(currentQuestion);
     sec += 10;
     document.getElementById("timerDisplay").innerHTML = "00:" + sec;
   } else {
@@ -112,6 +124,7 @@ function handleAnswerClick(event) {
     document.getElementById("timerDisplay").innerHTML = "00:" + sec;
   }
 
+  // When there are no more questions, show the end screen.
   if (currentQuestion.next) {
     newQuestion();
   } else {
@@ -130,6 +143,7 @@ function newQuestion() {
   showQuestion(currentQuestion);
 }
 
+// Keeps end screen hidden until questions run out.
 function hideEndScreen() {
   endQuiz.style.display = "none";
 }
@@ -145,9 +159,18 @@ function showEndScreen() {
 submitBtn.addEventListener("click", function (event) {
   event.preventDefault();
   var initialsValue = document.getElementById("inputElement").value;
-  console.log(initialsValue);
   localStorage.setItem(
     "Initials",
     initialsValue.toUpperCase() + " - Score: " + sec
   );
+  showScoreScreen();
+  hideEndScreen();
+  hideTimer();
+
+  // Display Scores
+  var userScore = initialsValue + " - " + sec;
+  var ul = document.getElementById("scoreList");
+  var li = document.createElement("li");
+  li.appendChild(document.createTextNode(userScore));
+  ul.appendChild(li);
 });
