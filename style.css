@@ -1,26 +1,94 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+}
+
+body {
+  background-color: #e6dbbf;
 }
 
 h1 {
   text-align: center;
-  margin: 20px;
+  margin: 60px;
+  color: #005f73;
+  font-size: 70px;
+}
+
+h2 {
+  color: #005f73;
+}
+
+#timerDisplay {
+  color: #005f73;
+  font-size: 40px;
 }
 
 .quiz-container {
-  border: 3px solid black;
+  border: 3px solid #0a9396;
+  border-radius: 20px;
   margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 50%;
-  padding: 15px;
+  padding: 100px;
   gap: 15px;
+  background-color: #94d2bd;
+}
+
+.start-button {
+  background-color: #005f73;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  padding: 15px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
 
 .answer-container {
   display: flex;
   flex-direction: row;
+}
+
+.answer-button {
+  background-color: #005f73;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+#endQuiz {
+  color: #005f73;
+  font-size: 20px;
+}
+
+#inputElement {
+  padding: 10px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border-style: none;
+}
+
+#submitBtn {
+  background-color: #005f73;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
